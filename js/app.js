@@ -1,14 +1,14 @@
-/*list that holds all of our cards*/
-const cardArray =["fa fa-diamond" , "fa fa-diamond" , "fa fa-paper-plane-o" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bolt","fa fa-bolt","fa fa-cube","fa fa-cube","fa fa-leaf",
-"fa fa-leaf", "fa fa-bicycle","fa fa-bicycle","fa fa-bomb","fa fa-bomb"];
-
-//move all the cards into cardsDeck
+// Intialing open , match cards and selecting the cards into cardsDeck
 const cardsDeck = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards =[];
 
-// loop over all the cards and invoke a function to check individual cards
+/*array to holds all of our cards*/
+const cardArray =["fa fa-leaf" , "fa fa-bomb" , "fa fa-cube" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bolt","fa fa-paper-plane-o","fa fa-cube","fa fa-diamond",
+"fa fa-leaf", "fa fa-bicycle","fa fa-bolt","fa fa-diamond","fa fa-bomb"];
 
+
+// loop over all the cards and invoke a function which checks action on individual cards
 function init()
 {
   for ( let i=0; i < cardArray.length ; i++)
@@ -18,13 +18,14 @@ function init()
   card.innerHTML= `<i class ="${cardArray[i]}"></i>`;
   cardsDeck.appendChild(card);
 
-  click(card); //invoke the function which acts on any individual card
+  /*For all the cards within the loop , invoke the function which acts on individual card whenever event listener action happenes.*/
+  click(card);
 
   } // END OF FOR loop
 
 } // END OF Init Function
 
-
+/* Function which listens the event listener ; open and show the card when a card is clicked:*/
 function click(card)
 {
 card.addEventListener("click" , function() {
@@ -46,7 +47,9 @@ card.addEventListener("click" , function() {
 } //End of Click card FUNCTION
 
 
-/* Compare the two cards within the function */
+/* Compare the two cards within below function
+if the cards do match, lock the cards in the open position
+if the cards do not match, remove the cards from the list and hide the card's symbol */
 function compare (currentCard,previousCard)
 {
   if (currentCard.innerHTML === previousCard.innerHTML)
@@ -61,23 +64,24 @@ function compare (currentCard,previousCard)
 
   } // end of IF STATEMENT
 
-// when card doesnt matched
+/* when card doesnt matched -wait for few milliseconds and disable the card */
    else {
 
     setTimeout(function(){
     currentCard.classList.remove("open" , "show","disable");
     previousCard.classList.remove("open" , "show","disable");
-    openedCards =[];
-  },500);
+
+  },350);
+
+  /* Initiallze the open cards again to remove the disable functionality */
+  openedCards =[];
 
   } // END OF ELSE
 
-// add functionality of moves
-//addMove();
+/* Invoke the move function whether match or unmatched cards got clicked */
+addMove();
 
-  }
-
-
+}
 // Check if the game is over or not
 function isOver(){
   if (matchedCards == cardArray)
@@ -86,11 +90,17 @@ function isOver(){
   }
 }
 
-/* let moves=0;
-functon addMove (){
+/* Funciton which shows the number, increment the number of moves when
+user clicks on the deck during matched/unmatched instances
+and increment the move counter and display it on the page*/
+const movesContainer = document.querySelector(".moves");
+let moves=0;
+movesContainer.innerHTML = 0;
 
+function addMove (){
   moves++;
-} */
+  movesContainer.innerHTML =moves;
+}
 
 /* Restart Button
 const restartBtn = document.querySelector(".restart");
@@ -104,6 +114,8 @@ restartBtn.addEventListener("click" , function(){
 
   // clear any elements which is still in the matched cards variable
   matchedCards=[];
+  moves=0;
+  movesContainer.innerHTML = moves;
 });*/
 
 init();
