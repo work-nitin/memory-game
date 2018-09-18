@@ -3,11 +3,13 @@ const cardsDeck = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards =[];
 
+
 /*array to holds all of our cards*/
 const cardArray =["fa fa-leaf" , "fa fa-bomb" , "fa fa-cube" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bolt","fa fa-paper-plane-o","fa fa-cube","fa fa-diamond",
 "fa fa-leaf", "fa fa-bicycle","fa fa-bolt","fa fa-diamond","fa fa-bomb"];
 
 
+/* TODO: add card elements */
 // loop over all the cards and invoke a function which checks action on individual cards
 function init()
 {
@@ -25,7 +27,9 @@ function init()
 
 } // END OF Init Function
 
+
 /* Function which listens the event listener ; open and show the card when a card is clicked:*/
+/* TODO: Prevent the user from selecting the same card twice using disable property */
 function click(card)
 {
 card.addEventListener("click" , function() {
@@ -48,8 +52,7 @@ card.addEventListener("click" , function() {
 
 
 /* Compare the two cards within below function
-if the cards do match, lock the cards in the open position
-if the cards do not match, remove the cards from the list and hide the card's symbol */
+if the cards do match, lock the cards in the open position ; if the cards do not match, remove the cards from the list and hide the card's symbol*/
 function compare (currentCard,previousCard)
 {
   if (currentCard.innerHTML === previousCard.innerHTML)
@@ -61,27 +64,24 @@ function compare (currentCard,previousCard)
 
     openedCards =[];
     isOver(); //call the function when game is overs
-
   } // end of IF STATEMENT
 
-/* when card doesnt matched -wait for few milliseconds and disable the card */
+/* when card doesnt matched -wait for few milliseconds*/
    else {
-
     setTimeout(function(){
     currentCard.classList.remove("open" , "show","disable");
     previousCard.classList.remove("open" , "show","disable");
-
   },350);
 
   /* Initiallze the open cards again to remove the disable functionality */
   openedCards =[];
-
   } // END OF ELSE
+
 
 /* Invoke the move function whether match or unmatched cards got clicked */
 addMove();
-
 }
+
 // Check if the game is over or not
 function isOver(){
   if (matchedCards == cardArray)
@@ -91,8 +91,7 @@ function isOver(){
 }
 
 /* Funciton which shows the number, increment the number of moves when
-user clicks on the deck during matched/unmatched instances
-and increment the move counter and display it on the page*/
+user clicks on the deck during matched/unmatched instances and increment the move counter and display it on the page*/
 const movesContainer = document.querySelector(".moves");
 let moves=0;
 movesContainer.innerHTML = 0;

@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #cccccc url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -54,7 +54,7 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
+    background: #2e39;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -71,7 +71,7 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #02b3;
     cursor: default;
 }
 
