@@ -4,14 +4,17 @@ let matchedCards = [];
 
 const cardsDeck = document.querySelector( ".deck" );
 const modal = document.querySelector(".modal");
-const starsC = document.querySelector(".stars");
+const starsContainer = document.querySelector(".stars");
+
 
 const cardArray =["fa fa-leaf" , "fa fa-leaf" , "fa fa-paper-plane-o" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bicycle","fa fa-cube","fa fa-cube","fa fa-diamond",
 "fa fa-diamond", "fa fa-bolt","fa fa-bolt","fa fa-bomb","fa fa-bomb"];
 
 
 /* TODO: add card elements */
-// Initialize a dynamic card and loop over them and invoke a function which checks action on individual cards
+
+// create dynamic card elements and loop over them
+//invoke a function which checks action on individual cards
 function init() {
   // Shuffle the current `cardArray`
 //const icons = shuffle(cardArray);
@@ -28,8 +31,9 @@ function init() {
 } // END OF Init Function
 
 
+/* TODO: Perform click action  */
+
 /* Function which listens the event listener -click  ; open and show the card when a card is clicked:*/
-/* TODO: Prevent the user from selecting the same card twice using disable property */
 function addCardListener(card) {
 	card.addEventListener( "click", function() {
 		const currentCard = this;
@@ -61,7 +65,6 @@ function compare( currentCard, previousCard ) {
 		openedCards = [];
 		endofGame(); //call the function when game is overs
 	} // end of IF STATEMENT
-
 	/* when card doesnt matched -wait for few milliseconds*/
 	else {
 		setTimeout( function() {
@@ -90,7 +93,6 @@ function endofGame(){
 /*
  * Display the Message when game is over
  */
-
 function modalMessage() {
   const winMessage = document.querySelector(".modal-message");
 modal.style.display = "block";
@@ -107,10 +109,7 @@ movesContainer.innerHTML = 0;
 
 function addMove() {
 	moves++;
-	movesContainer.innerHTML = moves;
-
   //call the rating function
-
   rating();
 }
 
@@ -118,7 +117,6 @@ function addMove() {
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click" , function(){
   // Start the game again
-
      restartGame();
 });
 
@@ -129,8 +127,7 @@ cardsDeck.innerHTML = "";
 matchedCards = [];
 movesContainer.innerHTML = 0;
 moves=0;
-const panel = document.querySelector("#score-panel");
-panel.prepend(starsC);
+starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
     // Start the game again
     init();
 
@@ -153,9 +150,7 @@ function shuffle( array ) {
 }
 
 /* Rating*/
-const starsContainer = document.querySelector(".stars");
 function rating(){
-
   if (moves > 4){
       starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
   }
