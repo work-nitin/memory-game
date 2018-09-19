@@ -1,8 +1,11 @@
 //Declare Global variables
-const cardsDeck = document.querySelector( ".deck" );
-const modal = document.querySelector(".modal");
 let openedCards = [];
 let matchedCards = [];
+
+const cardsDeck = document.querySelector( ".deck" );
+const modal = document.querySelector(".modal");
+const starsC = document.querySelector(".stars");
+
 const cardArray =["fa fa-leaf" , "fa fa-leaf" , "fa fa-paper-plane-o" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bicycle","fa fa-cube","fa fa-cube","fa fa-diamond",
 "fa fa-diamond", "fa fa-bolt","fa fa-bolt","fa fa-bomb","fa fa-bomb"];
 
@@ -25,12 +28,13 @@ function init() {
 } // END OF Init Function
 
 
-/* Function which listens the event listener ; open and show the card when a card is clicked:*/
+/* Function which listens the event listener -click  ; open and show the card when a card is clicked:*/
 /* TODO: Prevent the user from selecting the same card twice using disable property */
 function addCardListener(card) {
 	card.addEventListener( "click", function() {
 		const currentCard = this;
 		const previousCard = openedCards[ 0 ];
+
 
 		if ( openedCards.length === 1 ) {
 			card.classList.add( "open", "show", "disable" );
@@ -90,13 +94,6 @@ function endofGame(){
 function modalMessage() {
   const winMessage = document.querySelector(".modal-message");
 modal.style.display = "block";
-
-//winMessage.appendChild(restart);
-
-//winMessage.appendChild(stars);
-
-//winMessage.appendChild(time);
-
 winMessage.appendChild(movesContainer);
 
 }
@@ -111,23 +108,33 @@ movesContainer.innerHTML = 0;
 function addMove() {
 	moves++;
 	movesContainer.innerHTML = moves;
+
+  //call the rating function
+
+  rating();
 }
 
-/* Restart Button
+/* Restart Button */
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click" , function(){
+  // Start the game again
 
-  //Delete all the cardsDeck
-  cardArray.innerHTML = "";
+     restartGame();
+});
 
-//Initiallze all the cards again so that we can display the empty cards
-  init();
 
-  // clear any elements which is still in the matched cards variable
-  matchedCards=[];
-  moves=0;
-  movesContainer.innerHTML = moves;
-});*/
+function restartGame() {
+modal.style.display = "none";
+cardsDeck.innerHTML = "";
+matchedCards = [];
+movesContainer.innerHTML = 0;
+moves=0;
+const panel = document.querySelector("#score-panel");
+panel.prepend(starsC);
+    // Start the game again
+    init();
+
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle( array ) {
@@ -144,5 +151,19 @@ function shuffle( array ) {
 
 	return array;
 }
+
+/* Rating*/
+const starsContainer = document.querySelector(".stars");
+function rating(){
+
+  if (moves > 4){
+      starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
+  }
+
+  if (moves > 6){
+      starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> ';
+  }
+}
+
 
 init();
