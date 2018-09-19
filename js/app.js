@@ -1,104 +1,112 @@
-// Intialing open , match cards and selecting the cards into cardsDeck
-const cardsDeck = document.querySelector(".deck");
+//Declare Global variables
+const cardsDeck = document.querySelector( ".deck" );
+const modal = document.querySelector(".modal");
 let openedCards = [];
-let matchedCards =[];
-
-
-/*array to holds all of our cards*/
+let matchedCards = [];
 const cardArray =["fa fa-leaf" , "fa fa-bomb" , "fa fa-cube" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bolt","fa fa-paper-plane-o","fa fa-cube","fa fa-diamond",
 "fa fa-leaf", "fa fa-bicycle","fa fa-bolt","fa fa-diamond","fa fa-bomb"];
 
 
 /* TODO: add card elements */
-// loop over all the cards and invoke a function which checks action on individual cards
-function init()
-{
-  for ( let i=0; i < cardArray.length ; i++)
-  {
-  const card =document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML= `<i class ="${cardArray[i]}"></i>`;
-  cardsDeck.appendChild(card);
+// Initialize a dynamic card and loop over them and invoke a function which checks action on individual cards
+function init() {
+  // Shuffle the current `cardArray`
+const icons = shuffle(cardArray);
+	for ( let i = 0; i < cardArray.length; i++ ) {
+		const card = document.createElement( "li" );
+		card.classList.add( "card" );
+		card.innerHTML = `<i class ="${cardArray[i]}"></i>`;
+		cardsDeck.appendChild( card );
+		/*For alll the cards , invoke the function which acts on individual card untill cardArray finishes*/
+		addCardListener(card);
 
-  /*For all the cards within the loop , invoke the function which acts on individual card whenever event listener action happenes.*/
-  click(card);
-
-  } // END OF FOR loop
+	} // END OF FOR loop
 
 } // END OF Init Function
 
 
 /* Function which listens the event listener ; open and show the card when a card is clicked:*/
 /* TODO: Prevent the user from selecting the same card twice using disable property */
-function click(card)
-{
-card.addEventListener("click" , function() {
-  const currentCard = this;
-  const previousCard= openedCards[0];
+function addCardListener(card) {
+	card.addEventListener( "click", function() {
+		const currentCard = this;
+		const previousCard = openedCards[ 0 ];
 
-  if (openedCards.length === 1){
-    card.classList.add("open", "show" , "disable");
-    openedCards.push(this);
+		if ( openedCards.length === 1 ) {
+			card.classList.add( "open", "show", "disable" );
+			openedCards.push( this );
+			compare( currentCard, previousCard );
+		} else {
+			currentCard.classList.add( "open", "show", "disable" );
+			openedCards.push( this );
+		}
 
-    compare(currentCard,previousCard);
-  }
-      else {
-        currentCard.classList.add("open", "show","disable");
-        openedCards.push(this);
-      }
-
-}); // End of event listener ends
+	} ); // End of event listener ends
 } //End of Click card FUNCTION
 
 
 /* Compare the two cards within below function
 if the cards do match, lock the cards in the open position ; if the cards do not match, remove the cards from the list and hide the card's symbol*/
-function compare (currentCard,previousCard)
-{
-  if (currentCard.innerHTML === previousCard.innerHTML)
-  {
-    //card matched
-    currentCard.classList.add("match");
-    previousCard.classList.add("match");
-    matchedCards.push(currentCard,previousCard);
+function compare( currentCard, previousCard ) {
+	if ( currentCard.innerHTML === previousCard.innerHTML ) {
+		//card matched
+		currentCard.classList.add( "match" );
+		previousCard.classList.add( "match" );
+		matchedCards.push( currentCard, previousCard );
 
-    openedCards =[];
-    isOver(); //call the function when game is overs
-  } // end of IF STATEMENT
+		openedCards = [];
+		endofGame(); //call the function when game is overs
+	} // end of IF STATEMENT
 
-/* when card doesnt matched -wait for few milliseconds*/
-   else {
-    setTimeout(function(){
-    currentCard.classList.remove("open" , "show","disable");
-    previousCard.classList.remove("open" , "show","disable");
-  },350);
+	/* when card doesnt matched -wait for few milliseconds*/
+	else {
+		setTimeout( function() {
+			currentCard.classList.remove( "open", "show", "disable" );
+			previousCard.classList.remove( "open", "show", "disable" );
+		}, 350 );
 
-  /* Initiallze the open cards again to remove the disable functionality */
-  openedCards =[];
-  } // END OF ELSE
+		/* Initiallze the open cards again to remove the disable functionality */
+		openedCards = [];
+	} // END OF ELSE
 
-
-/* Invoke the move function whether match or unmatched cards got clicked */
-addMove();
-}
+	/* Invoke the move function whether match or unmatched cards got clicked */
+	addMove();
+} // End of compare function
 
 // Check if the game is over or not
-function isOver(){
-  if (matchedCards == cardArray)
-  {
-    console.log("game overs");
-  }
+function endofGame(){
+  // Check if the `matchedCards` length equals to the `cardArray`
+      if (cardArray.length === matchedCards.length) {
+          IsgameOver();
+
+      }
+
 }
 
-/* Funciton which shows the number, increment the number of moves when
-user clicks on the deck during matched/unmatched instances and increment the move counter and display it on the page*/
-const movesContainer = document.querySelector(".moves");
-let moves=0;
+/*
+ * Display the Message when game is over
+ */
+
+function IsgameOver() {
+    // Display the modal
+    modal.style.top = "0";
+    // Add moves to the Modal
+
+    const totalMoves = document.querySelector("#total_moves");
+    totalMoves.innerHTML = moves +1;
+
+}
+
+
+/* Funciton to control the number of moves when
+user clicks on the deck card for matched/unmatched instances and display it on the page*/
+const movesContainer = document.querySelector( ".moves" );
+let moves = 0;
 movesContainer.innerHTML = 0;
 
-function addMove (){
-  moves++;
-  movesContainer.innerHTML =moves;
+function addMove() {
+	moves++;
+	movesContainer.innerHTML = moves;
 }
 
 /* Restart Button
@@ -117,38 +125,20 @@ restartBtn.addEventListener("click" , function(){
   movesContainer.innerHTML = moves;
 });*/
 
-init();
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle( array ) {
+	var currentIndex = array.length
+		, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+	while ( currentIndex !== 0 ) {
+		randomIndex = Math.floor( Math.random() * currentIndex );
+		currentIndex -= 1;
+		temporaryValue = array[ currentIndex ];
+		array[ currentIndex ] = array[ randomIndex ];
+		array[ randomIndex ] = temporaryValue;
+	}
 
-    return array;
+	return array;
 }
 
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+init();

@@ -54,7 +54,7 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e39;
+    background: #2e3911;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
@@ -66,12 +66,14 @@ h1 {
 }
 
 .deck .card.disable {
-  pointer-events: none
+  pointer-events: none;
+  	animation-name: shake;
+  opacity: 0.9;
 }
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3;
+    background: #02b333;
     cursor: default;
 }
 
@@ -88,25 +90,123 @@ h1 {
 /*
  * Styles for the Score Panel
  */
-.score-panel {
+#score-panel {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
 }
 
-.score-panel .stars {
+#score-panel .stars {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+#score-panel .stars li {
     list-style: none;
     display: inline-block;
 }
 
-.score-panel .restart {
+#score-panel .restart {
     float: right;
     cursor: pointer;
 }
+
+
+
+@media only screen and (max-width: 800px){
+
+  .deck .card{
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+  }
+
+  .deck {
+      width: 390px;
+    }
+  }
+
+@media only screen and (max-width: 450px){
+
+  .deck .card{
+
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 10px 10px 0 !important;
+}
+    .deck {
+    width: 240px;
+
+  }
+
+  }
+
+
+  .modal {
+
+    position: absolute;
+
+    top: -150%;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    z-index: 99;
+
+    transition: all 300ms ease; }
+
+    .modal .inner {
+
+      width: 50%;
+
+      margin: 10% auto;
+
+      padding: 2em;
+
+      text-align: center;
+
+      background: #ffffff;
+
+       }
+
+      .modal .inner h2 {
+
+        font-size: 2.5em;
+
+        margin-bottom: 0.5em; }
+
+      .modal .inner p {
+
+        font-size: 1.4em;
+
+        margin-bottom: 0.5em; }
+
+      .modal .inner button {
+
+        margin-top: 1.5em;
+
+        padding: 0.5em 3em;
+
+        font-size: 1.1em;
+
+        border: 0;
+
+        background: #fff;
+
+        box-shadow: 1px 1px 5px 0px #ccc;
+
+        cursor: pointer;
+
+        transition: all 300ms ease; }
+
+        .modal .inner button:hover {
+
+          box-shadow: none; }

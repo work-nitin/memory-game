@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-
 	<title>Matching Game</title>
 	<meta content="" name="description">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet prefetch">
 	<link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet prefetch">
 	<link href="css/app.css" rel="stylesheet">
@@ -17,8 +16,7 @@
 			<h1>Interactive Matching Game</h1>
 		</header>
 
-
-		<section class="score-panel">
+		<div id ="score-panel">
 			<ul class="stars">
 				<li><i class="fa fa-star"></i>
 				</li>
@@ -36,8 +34,21 @@
 			<div class="restart">
 				<i class="fa fa-repeat"></i>
 			</div>
-		</section>
+		</div>
 
+    <div class="modal">
+
+                <div class="inner">
+
+                    <h2>You have Won!!</h2>
+                    <p>In <span id="totalHours"></span> Hours, <span id="totalMinutes"></span> Minutes and <span id="totalSeconds"></span> Seconds</p>
+                    <p>Total number of moves->
+                        <span id="total_moves"></span><br>
+                        and your rating is: <span id="total_rate"></span>
+                    </p>
+                              </div>
+
+            </div>
 
 		<ul class="deck">
 		</ul>
