@@ -4,6 +4,7 @@ let matchedCards = [];
 
 const cardsDeck = document.querySelector( ".deck" );
 const modal = document.querySelector(".modal");
+const starsC = document.querySelector(".stars");
 const starsContainer = document.querySelector(".stars");
 
 
@@ -12,9 +13,7 @@ const cardArray =["fa fa-leaf" , "fa fa-leaf" , "fa fa-paper-plane-o" ,"fa fa-pa
 
 
 /* TODO: add card elements */
-
-// create dynamic card elements and loop over them
-//invoke a function which checks action on individual cards
+// Initialize a dynamic card and loop over them and invoke a function which checks action on individual cards
 function init() {
   // Shuffle the current `cardArray`
 //const icons = shuffle(cardArray);
@@ -31,9 +30,8 @@ function init() {
 } // END OF Init Function
 
 
-/* TODO: Perform click action  */
-
 /* Function which listens the event listener -click  ; open and show the card when a card is clicked:*/
+/* TODO: Prevent the user from selecting the same card twice using disable property */
 function addCardListener(card) {
 	card.addEventListener( "click", function() {
 		const currentCard = this;
@@ -65,6 +63,7 @@ function compare( currentCard, previousCard ) {
 		openedCards = [];
 		endofGame(); //call the function when game is overs
 	} // end of IF STATEMENT
+
 	/* when card doesnt matched -wait for few milliseconds*/
 	else {
 		setTimeout( function() {
@@ -93,6 +92,7 @@ function endofGame(){
 /*
  * Display the Message when game is over
  */
+
 function modalMessage() {
   const winMessage = document.querySelector(".modal-message");
 modal.style.display = "block";
@@ -109,7 +109,10 @@ movesContainer.innerHTML = 0;
 
 function addMove() {
 	moves++;
+	movesContainer.innerHTML = moves;
+
   //call the rating function
+
   rating();
 }
 
@@ -117,6 +120,7 @@ function addMove() {
 const restartBtn = document.querySelector(".restart");
 restartBtn.addEventListener("click" , function(){
   // Start the game again
+
      restartGame();
 });
 
@@ -125,7 +129,7 @@ function restartGame() {
 modal.style.display = "none";
 cardsDeck.innerHTML = "";
 matchedCards = [];
-movesContainer.innerHTML = 0;
+movesContainer.innerHTML = moves;
 moves=0;
 starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
     // Start the game again
@@ -151,6 +155,7 @@ function shuffle( array ) {
 
 /* Rating*/
 function rating(){
+
   if (moves > 4){
       starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
   }
