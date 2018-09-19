@@ -144,69 +144,52 @@ h1 {
 
   }
 
+  /*modal message*/
+
+
 
   .modal {
 
-    position: absolute;
+      display: none;
 
-    top: -150%;
+      position: absolute;
 
-    left: 0;
+      z-index: 99;
 
-    width: 100%;
+      left: 50;
 
-    height: 100%;
-
-    background: rgba(255, 255, 255, 0.9);
-
-    z-index: 99;
-
-    transition: all 300ms ease; }
-
-    .modal .inner {
+      top: 50;
 
       width: 50%;
 
-      margin: 10% auto;
+      height: 50%;
 
-      padding: 2em;
+      overflow: auto;
+
+      background: #fff;
+
+      opacity: 1;
+
+  }
+
+
+
+  .modal-message {
 
       text-align: center;
 
-      background: #ffffff;
+      background-color: #fefefe;
 
-       }
+      margin: 15% auto;
 
-      .modal .inner h2 {
+      padding: 20px;
 
-        font-size: 2.5em;
+  }
 
-        margin-bottom: 0.5em; }
+  .win-message {
 
-      .modal .inner p {
+      font-size: 27px;
 
-        font-size: 1.4em;
+      letter-spacing: 2px;
 
-        margin-bottom: 0.5em; }
-
-      .modal .inner button {
-
-        margin-top: 1.5em;
-
-        padding: 0.5em 3em;
-
-        font-size: 1.1em;
-
-        border: 0;
-
-        background: #fff;
-
-        box-shadow: 1px 1px 5px 0px #ccc;
-
-        cursor: pointer;
-
-        transition: all 300ms ease; }
-
-        .modal .inner button:hover {
-
-          box-shadow: none; }
+  }

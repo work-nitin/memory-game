@@ -3,15 +3,15 @@ const cardsDeck = document.querySelector( ".deck" );
 const modal = document.querySelector(".modal");
 let openedCards = [];
 let matchedCards = [];
-const cardArray =["fa fa-leaf" , "fa fa-bomb" , "fa fa-cube" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bolt","fa fa-paper-plane-o","fa fa-cube","fa fa-diamond",
-"fa fa-leaf", "fa fa-bicycle","fa fa-bolt","fa fa-diamond","fa fa-bomb"];
+const cardArray =["fa fa-leaf" , "fa fa-leaf" , "fa fa-paper-plane-o" ,"fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-anchor", "fa fa-bicycle","fa fa-bicycle","fa fa-cube","fa fa-cube","fa fa-diamond",
+"fa fa-diamond", "fa fa-bolt","fa fa-bolt","fa fa-bomb","fa fa-bomb"];
 
 
 /* TODO: add card elements */
 // Initialize a dynamic card and loop over them and invoke a function which checks action on individual cards
 function init() {
   // Shuffle the current `cardArray`
-const icons = shuffle(cardArray);
+//const icons = shuffle(cardArray);
 	for ( let i = 0; i < cardArray.length; i++ ) {
 		const card = document.createElement( "li" );
 		card.classList.add( "card" );
@@ -77,7 +77,7 @@ function compare( currentCard, previousCard ) {
 function endofGame(){
   // Check if the `matchedCards` length equals to the `cardArray`
       if (cardArray.length === matchedCards.length) {
-          IsgameOver();
+          modalMessage();
 
       }
 
@@ -87,13 +87,17 @@ function endofGame(){
  * Display the Message when game is over
  */
 
-function IsgameOver() {
-    // Display the modal
-    modal.style.top = "0";
-    // Add moves to the Modal
+function modalMessage() {
+  const winMessage = document.querySelector(".modal-message");
+modal.style.display = "block";
 
-    const totalMoves = document.querySelector("#total_moves");
-    totalMoves.innerHTML = moves +1;
+//winMessage.appendChild(restart);
+
+//winMessage.appendChild(stars);
+
+//winMessage.appendChild(time);
+
+winMessage.appendChild(movesContainer);
 
 }
 
