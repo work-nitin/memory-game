@@ -31,7 +31,7 @@ body {
 
 h1 {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
+	font-weight: 240;
 }
 
 /*
@@ -41,12 +41,10 @@ h1 {
  */
 
 .deck {
-	width: 660px;
-	min-height: 680px;
+	width: 600px;
+	min-height: 600px;
 	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-	padding: 32px;
-	border-radius: 10px;
-	box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  padding: 30px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -55,8 +53,8 @@ h1 {
 }
 
 .deck .card {
-	height: 125px;
-	width: 125px;
+	height: 115px;
+	width: 115px;
 	background: #2e3911;
 	font-size: 0;
 	color: #ffffff;
@@ -76,18 +74,18 @@ h1 {
 
 .deck .card.open {
 	transform: rotateY(0);
-	background: #02b333;
+	background: #74992e;;
 	cursor: default;
 }
 
 .deck .card.show {
-	font-size: 33px;
+	font-size: 30px;
 }
 
 .deck .card.match {
 	cursor: default;
 	background: #02ccba;
-	font-size: 33px;
+	font-size: 30px;
 }
 
 /*
@@ -98,15 +96,15 @@ h1 {
 
 #score-panel {
 	text-align: left;
-	width: 345px;
-	margin-bottom: 10px;
+	width: 545px;
+	margin-bottom: 5px;
 }
 
 #score-panel .stars {
 	margin: 0;
 	padding: 0;
 	display: inline-block;
-	margin: 0 5px 0 0;
+	margin: 0 2px 0 0;
 }
 
 #score-panel .stars li {
@@ -119,23 +117,22 @@ h1 {
 	cursor: pointer;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 750px) {
 	.deck .card {
 		width: 75px;
 		height: 75px;
 		line-height: 75px;
 	}
 	.deck {
-		width: 390px;
+		width: 400px;
 	}
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 460px) {
 	.deck .card {
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
-		margin: 0 10px 10px 0 !important;
+		width: 48px;
+		height: 48px;
+		line-height: 48px;
 	}
 	.deck {
 		width: 240px;
@@ -150,7 +147,7 @@ h1 {
 	z-index: 99;
 	left: 50;
 	top: 50;
-	width: 50%;
+	width: 40%;
 	height: 50%;
 	overflow: auto;
 	background: #fff;
@@ -165,6 +162,6 @@ h1 {
 }
 
 .win-message {
-	font-size: 27px;
+	font-size: 30px;
 	letter-spacing: 2px;
 }
