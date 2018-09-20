@@ -1,20 +1,15 @@
 //Declare Global variables
 
 let openedCards = [];
-
 let matchedCards = [];
-
 let initialTime = 0;
 let initialRank = 0;
 let finalRanking = 0;
 const cardsDeck = document.querySelector( ".deck" );
 const modal = document.querySelector( ".modal" );
 const starsContainer = document.querySelector( ".stars" );
-const cardArray = [ "fa fa-leaf", "fa fa-leaf", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bicycle", "fa fa-bicycle", "fa fa-cube", "fa fa-cube", "fa fa-diamond"
-, "fa fa-diamond", "fa fa-bolt", "fa fa-bolt", "fa fa-bomb", "fa fa-bomb" ];
-
-
-
+const cardArray = [ "fa fa-bomb", "fa fa-leaf", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bicycle", "fa fa-anchor", "fa fa-bicycle", "fa fa-diamond", "fa fa-cube", "fa fa-diamond"
+, "fa fa-cube", "fa fa-bolt", "fa fa-anchor", "fa fa-bomb", "fa fa-leaf" ];
 
 
 /* TODO: add card elements */
@@ -25,7 +20,7 @@ function init() {
 
 	// Shuffle the current `cardArray`
 
-	const icons = shuffle(cardArray);
+	const box = shuffle(cardArray);
 
 	for ( let i = 0; i < cardArray.length; i++ ) {
 
@@ -39,7 +34,7 @@ function init() {
 
 		/*For alll the cards , invoke the function which acts on individual card untill cardArray finishes*/
 
-		addCardListener( card );
+		clickCardListener( card );
 
 
 
@@ -57,7 +52,7 @@ function init() {
 
 /* TODO: Prevent the user from selecting the same card twice using disable property */
 
-function addCardListener( card ) {
+function clickCardListener( card ) {
 
 	card.addEventListener( "click", function() {
 
@@ -115,7 +110,7 @@ function compare( currentCard, previousCard ) {
 
 		openedCards = [];
 
-		endofGame(); //call the function when game is overs
+		endofGame(); //call to check if game is over or not
 
 	} // end of IF STATEMENT
 
@@ -142,9 +137,9 @@ function compare( currentCard, previousCard ) {
 
 
 
-	/* Invoke the move function whether match or unmatched cards got clicked */
+	/* Function to capture the number of moves whether match or unmatched cards got clicked */
 
-	addMove();
+	trackMoves();
 
 } // End of compare function
 
@@ -154,7 +149,7 @@ function compare( currentCard, previousCard ) {
 
 function endofGame() {
 
-	// Check if the `matchedCards` length equals to the `cardArray`
+	// Check if the `matchedCards` length equals to our original cards `cardArray`
 
 	if ( cardArray.length === matchedCards.length ) {
 		modalMessage();
@@ -171,7 +166,7 @@ function endofGame() {
 
 /*
 
- * Display the Message when game is over
+ * Pop up the modal and Display the Message when game is over
 
  */
 
@@ -186,7 +181,7 @@ function modalMessage() {
 	const timeContainer = document.querySelector( ".totalTime" );
 	timeContainer.innerHTML = 1;
 	const rankContainer = document.querySelector( ".playerRanking" );
-	rankContainer.innerHTML = moves;
+	rankContainer.innerHTML = moves; // Calculate Ranking based on the number of moves user made before Games Finishes. Rank is always less than 1 for the total number of moves.
 }
 
 
@@ -205,7 +200,7 @@ movesContainer.innerHTML = 0;
 
 
 
-function addMove() {
+function trackMoves() {
 
 	moves++;
 
@@ -217,7 +212,7 @@ function addMove() {
 
 
 
-	rating();
+	starRating();
 
 }
 
@@ -297,8 +292,13 @@ function shuffle( array ) {
 
 
 
-/* Rating*/
-function rating() {
+/* Rating : The game displays a star rating (from 1 to at least 3) that reflects the player's performance.
+ At the beginning of a game, its 3 stars. After 10 number of moves, it changes to 2 star rating.
+  After 16 moves, it changes to one star rating (down to 1).
+
+*/
+
+function starRating() {
 	if ( moves > 10 ) {
 		starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
 	}
