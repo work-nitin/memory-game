@@ -203,12 +203,26 @@ function modalMessage() {
 
 	const winMessage = document.querySelector( ".modal-message" );
 	modal.style.display = "block";
-	const successMovesContainer = document.querySelector( ".successMoves" );
+
+  const successMovesContainer = document.querySelector( ".successMoves" );
 	successMovesContainer.innerHTML = moves + 1;
-	const timeContainer = document.querySelector( ".totalTime" );
-	timeContainer.innerHTML = 1;
-	const rankContainer = document.querySelector( ".playerRanking" );
-	rankContainer.innerHTML = moves; // Calculate Ranking based on the number of moves user made before Games Finishes. Rank is always less than 1 for the total number of moves.
+
+    const rankContainer = document.querySelector( ".playerRanking" );
+	rankContainer.innerHTML = 	starsContainer.innerHTML;
+
+  // Add time to the Modal
+
+ const totalHours       = document.querySelector("#totalHours");
+
+ const totalMinutes     = document.querySelector("#totalMinutes");
+
+ const totalSeconds     = document.querySelector("#totalSeconds");
+
+    totalHours.innerHTML   = hours;
+
+    totalMinutes.innerHTML = minutes;
+
+    totalSeconds.innerHTML = seconds;
 }
 
 
@@ -265,9 +279,27 @@ restartBtn.addEventListener( "click", function() {
 
 function restartGame() {
 
-	modal.style.display = "none";
+    hoursContainer.innerHTML = "00";
 
-	cardsDeck.innerHTML = "";
+    minutesContainer.innerHTML = "00";
+
+    secondsContainer.innerHTML = "00";
+
+    stopTimer();
+
+    firstClick = true;
+
+    totalTime = 0;
+
+    hours = 0;
+
+    minutes = 0;
+
+    seconds = 0;
+
+	   modal.style.display = "none";
+
+	   cardsDeck.innerHTML = "";
 
 	matchedCards = [];/* Clear the Matched card array when user clicks on restart */
 
@@ -344,8 +376,7 @@ function starRating() {
 
 
 /*
-
- * Timer [ Start ]
+ * start the timer using the library setInterval func
 
  */
 
@@ -388,8 +419,7 @@ function startTimer() {
 
 /*
 
- * Timer [ Calculate Time ]
-
+ * Calculate Time
  */
 
 function calculateTime(totalTime) {
@@ -403,9 +433,7 @@ function calculateTime(totalTime) {
 }
 
 /*
-
- * Timer [ Stop ]
-
+use the library clearInterval and pass incrementer to it to stop the timer.
  */
 
 function stopTimer() {
