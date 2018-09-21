@@ -275,13 +275,13 @@ restartBtn.addEventListener( "click", function() {
 } );
 
 
+/* Play Again Button on the Modal*/
 
 const playAgainBtn = document.querySelector( ".play-again" );
 
 playAgainBtn.addEventListener( "click", function() {
 
-	// Start the game again
-
+	// Start the game again from within the modal
 
 
 	restartGame();
@@ -320,9 +320,10 @@ function restartGame() {
 
   openedCards =[]; /* Clear the opened card array when user clicks on restart */
 
+  moves = 0;
+
 	movesContainer.innerHTML = moves;
 
-	moves = 0;
 
 	starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li> <li><i class="fa fa-star"></i></li>';
 
