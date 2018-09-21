@@ -191,13 +191,16 @@ width: 5px;  }
 }
 
 .modal-message {
+  top:  -20%;
 	text-align: center;
 	background-color: #fefefe;
 	margin: 15% auto;
-	padding: 20px;
+	padding: 10px;
 }
 
 .win-message {
-	font-size: 30px;
+  top: -63%;
+  margin: 10%;
+	font-size: 20px;
 	letter-spacing: 2px;
 }
