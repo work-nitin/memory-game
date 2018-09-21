@@ -1,15 +1,23 @@
 //Declare Global variables
 
-let openedCards = [];
-let matchedCards = [];
-let initialTime = 0;
-let initialRank = 0;
-let finalRanking = 0;
-const cardsDeck = document.querySelector( ".deck" );
-const modal = document.querySelector( ".modal" );
-const starsContainer = document.querySelector( ".stars" );
-const cardArray = [ "fa fa-bomb", "fa fa-leaf", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-bolt", "fa fa-bicycle", "fa fa-anchor", "fa fa-bicycle", "fa fa-diamond", "fa fa-cube", "fa fa-diamond"
-, "fa fa-cube", "fa fa-bolt", "fa fa-anchor", "fa fa-bomb", "fa fa-leaf" ];
+let openedCards = [],
+    matchedCards = [],
+    firstClick = true,
+    hours, minutes, seconds,
+    totalTime = 0,
+    incrementer;
+
+const cardsDeck = document.querySelector( ".deck" ),
+      modal = document.querySelector( ".modal" ),
+      starsContainer = document.querySelector( ".stars" ),
+      initialArray =["fa fa-leaf", "fa fa-paper-plane-o" ,"fa fa-anchor", "fa fa-bicycle" , "fa fa-cube","fa fa-diamond", "fa fa-bolt","fa fa-bomb"],
+      cardArray = initialArray.concat(initialArray),
+      secondsContainer = document.querySelector("#seconds"),
+      minutesContainer = document.querySelector("#minutes"),
+      hoursContainer   = document.querySelector("#hours");
+console.log(initialArray);
+console.log(cardArray);
+
 
 
 /* TODO: add card elements */
@@ -20,7 +28,7 @@ function init() {
 
 	// Shuffle the current `cardArray`
 
-	const box = shuffle(cardArray);
+//	const box = shuffle(cardArray);
 
 	for ( let i = 0; i < cardArray.length; i++ ) {
 
@@ -59,6 +67,18 @@ function clickCardListener( card ) {
 		const currentCard = this;
 
 		const previousCard = openedCards[ 0 ];
+
+
+                // The First Click? Start the timer!
+
+                if(firstClick) {
+
+                    startTimer();
+
+                    firstClick = false; // This will prevent the timer to start again if the user clicked on another card
+
+                }
+
 
 
 
@@ -152,6 +172,13 @@ function endofGame() {
 	// Check if the `matchedCards` length equals to our original cards `cardArray`
 
 	if ( cardArray.length === matchedCards.length ) {
+
+    // Stop Timer
+
+    stopTimer();
+
+
+
 		modalMessage();
 
 
@@ -242,7 +269,9 @@ function restartGame() {
 
 	cardsDeck.innerHTML = "";
 
-	matchedCards = [];
+	matchedCards = [];/* Clear the Matched card array when user clicks on restart */
+
+  openedCards =[]; /* Clear the opened card array when user clicks on restart */
 
 	movesContainer.innerHTML = moves;
 
@@ -312,6 +341,80 @@ function starRating() {
 
 
 
+
+
+/*
+
+ * Timer [ Start ]
+
+ */
+
+function startTimer() {
+
+    // Start Incrementer
+
+      incrementer = setInterval(function() {
+
+
+        // Add totalTime by 1
+
+        totalTime += 1;
+
+
+
+        // Convert Total Time to H:M:S
+
+        calculateTime(totalTime);
+
+
+
+        // Change the current time values
+
+        secondsContainer.innerHTML = seconds;
+
+        minutesContainer.innerHTML = minutes;
+
+        hoursContainer.innerHTML   = hours;
+
+
+
+    }, 1000);
+
+
+
+
+
+}
+
+/*
+
+ * Timer [ Calculate Time ]
+
+ */
+
+function calculateTime(totalTime) {
+
+    hours   = Math.floor( totalTime / 60 / 60);
+
+    minutes = Math.floor( (totalTime / 60) % 60);
+
+    seconds = totalTime % 60;
+
+}
+
+/*
+
+ * Timer [ Stop ]
+
+ */
+
+function stopTimer() {
+
+    // Stop Timer
+
+    clearInterval(incrementer);
+
+}
 
 
 init();
