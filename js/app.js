@@ -5,7 +5,7 @@ let openedCards = [],
     firstClick = true,
     hours, minutes, seconds,
     totalTime = 0,
-    incrementer;
+    counter;
 
 const cardsDeck = document.querySelector( ".deck" ),
       modal = document.querySelector( ".modal" ),
@@ -382,9 +382,9 @@ function starRating() {
 
 function startTimer() {
 
-    // Start Incrementer
+    // Start counter
 
-      incrementer = setInterval(function() {
+      counter = setInterval(function() {
 
 
         // Add totalTime by 1
@@ -433,14 +433,14 @@ function calculateTime(totalTime) {
 }
 
 /*
-use the library clearInterval and pass incrementer to it to stop the timer.
+use the library clearInterval and pass counter to it to stop the timer.
  */
 
 function stopTimer() {
 
     // Stop Timer
 
-    clearInterval(incrementer);
+    clearInterval(counter);
 
 }
 
