@@ -28,7 +28,7 @@ function init() {
 
 	// Shuffle the current `cardArray`
 
-//	const box = shuffle(cardArray);
+	const box = shuffle(cardArray);
 
 	for ( let i = 0; i < cardArray.length; i++ ) {
 
