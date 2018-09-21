@@ -263,7 +263,22 @@ function trackMoves() {
 
 const restartBtn = document.querySelector( ".restart" );
 
+
 restartBtn.addEventListener( "click", function() {
+
+	// Start the game again
+
+
+
+	restartGame();
+
+} );
+
+
+
+const playAgainBtn = document.querySelector( ".play-again" );
+
+playAgainBtn.addEventListener( "click", function() {
 
 	// Start the game again
 
